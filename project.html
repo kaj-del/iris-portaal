@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project — Studio Iris van Gelder</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+</head>
+<body>
+<div class="app-shell">
+
+  <nav class="topnav">
+    <a class="topnav-brand" href="dashboard-iris.html" data-i18n="nav.back">← Terug</a>
+    <div class="topnav-spacer"></div>
+    <div class="topnav-actions">
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="nl">NL</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <span class="topnav-user" id="nav-user"></span>
+      <button class="btn btn-ghost btn-sm" id="btn-logout" data-i18n="nav.logout">Uitloggen</button>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="page-header" id="project-header">
+      <h1 id="project-title">Laden…</h1>
+      <div class="page-header-actions">
+        <button class="btn btn-secondary" id="btn-edit-project" data-i18n="common.edit">Bewerken</button>
+        <button class="btn btn-primary" id="btn-invite-client" data-i18n="project.invite_client">Klant uitnodigen</button>
+      </div>
+    </div>
+
+    <div class="section-tabs">
+      <button class="section-tab active" data-target="tab-overview" data-i18n="project.tabs.overview">Overzicht</button>
+      <button class="section-tab" data-target="tab-phases" data-i18n="project.tabs.phases">Fases</button>
+      <button class="section-tab" data-target="tab-hours" data-i18n="project.tabs.hours">Uren</button>
+      <button class="section-tab" data-target="tab-costs" data-i18n="project.tabs.costs">Kosten</button>
+      <button class="section-tab" data-target="tab-invoices" data-i18n="project.tabs.invoices">Facturatie</button>
+      <button class="section-tab" data-target="tab-documents" data-i18n="project.tabs.documents">Documenten</button>
+      <button class="section-tab" data-target="tab-log" data-i18n="project.tabs.log">Wijzigingslog</button>
+    </div>
+
+    <!-- Tab: Overzicht -->
+    <div class="tab-panel active" id="tab-overview">
+      <div class="two-col">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title" data-i18n="project.members">Klanten</h3>
+          </div>
+          <div id="members-list"><p class="text-muted" data-i18n="common.loading">Laden…</p></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Projectgegevens</h3>
+          </div>
+          <div id="project-details"><p class="text-muted" data-i18n="common.loading">Laden…</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Fases -->
+    <div class="tab-panel" id="tab-phases">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="project.tabs.phases">Fases</h2>
+        <button class="btn btn-primary btn-sm" id="btn-new-phase" data-i18n="phase.new">Nieuwe fase</button>
+      </div>
+      <div id="phases-list"><p class="text-muted" data-i18n="common.loading">Laden…</p></div>
+    </div>
+
+    <!-- Tab: Uren -->
+    <div class="tab-panel" id="tab-hours">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="project.tabs.hours">Uren</h2>
+        <button class="btn btn-primary btn-sm" id="btn-book-hours" data-i18n="dashboard.book_hours">Uren boeken</button>
+      </div>
+      <div id="hours-list"><p class="text-muted" data-i18n="common.loading">Laden…</p></div>
+    </div>
+
+    <!-- Tab: Kosten -->
+    <div class="tab-panel" id="tab-costs">
+      <div class="section-header">
+        <h2 class="section-title">Reiskosten</h2>
+        <button class="btn btn-primary btn-sm" id="btn-new-travel" data-i18n="travel.new">Reiskosten toevoegen</button>
+      </div>
+      <div id="travel-list"><p class="text-muted" data-i18n="common.loading">Laden…</p></div>
+
+      <div class="section-header" style="margin-top:var(--space-lg)">
+        <h2 class="section-title">Voorschotten</h2>
+        <button class="btn btn-primary btn-sm" id="btn-new-expense" data-i18n="expense.new">Voorschot toevoegen</button>
+      </div>
+      <div id="expenses-list"><p class="text-muted" data-i18n="common.loading">Laden…</p></div>
+    </div>
+
+    <!-- Tab: Facturatie -->
+    <div class="tab-panel" id="tab-invoices">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="project.tabs.invoices">Facturatie</h2>
+        <button class="btn btn-primary btn-sm" id="btn-new-invoice" data-i18n="invoice.new">Factuurmoment toevoegen</button>
+      </div>
+      <div id="invoices-list"><p class="text-muted" data-i18n="common.loading">Laden…</p></div>
+    </div>
+
+    <!-- Tab: Documenten -->
+    <div class="tab-panel" id="tab-documents">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="project.tabs.documents">Documenten</h2>
+        <div style="display:flex;gap:var(--space-sm)">
+          <button class="btn btn-secondary btn-sm" id="btn-new-link" data-i18n="document.link">Externe link</button>
+          <button class="btn btn-primary btn-sm" id="btn-upload-doc" data-i18n="document.upload">Bestand uploaden</button>
+        </div>
+      </div>
+      <div id="documents-list"><p class="text-muted" data-i18n="common.loading">Laden…</p></div>
+    </div>
+
+    <!-- Tab: Wijzigingslog -->
+    <div class="tab-panel" id="tab-log">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="project.tabs.log">Wijzigingslog</h2>
+      </div>
+      <div id="log-list"><p class="text-muted" data-i18n="common.loading">Laden…</p></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Modal: Project bewerken -->
+<div class="modal-backdrop" id="modal-edit-project">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" data-i18n="project.edit">Project bewerken</h2>
+      <button class="modal-close">✕</button>
+    </div>
+    <form id="form-edit-project">
+      <div class="form-group"><label data-i18n="project.name">Naam</label><input type="text" id="ep-name" required /></div>
+      <div class="form-group"><label data-i18n="project.description">Omschrijving</label><textarea id="ep-description"></textarea></div>
+      <div class="form-group">
+        <label data-i18n="project.status">Status</label>
+        <select id="ep-status">
+          <option value="active" data-i18n="project.status.active">Actief</option>
+          <option value="completed" data-i18n="project.status.completed">Afgerond</option>
+          <option value="archived" data-i18n="project.status.archived">Gearchiveerd</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close" data-i18n="common.cancel">Annuleren</button>
+        <button type="submit" class="btn btn-primary" data-i18n="common.save">Opslaan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Klant uitnodigen -->
+<div class="modal-backdrop" id="modal-invite">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" data-i18n="project.invite_client">Klant uitnodigen</h2>
+      <button class="modal-close">✕</button>
+    </div>
+    <form id="form-invite">
+      <div class="form-group"><label data-i18n="project.invite_name">Naam</label><input type="text" id="inv-name" required /></div>
+      <div class="form-group"><label data-i18n="project.invite_email">E-mailadres</label><input type="email" id="inv-email" required /></div>
+      <div id="invite-error" class="form-error" style="display:none"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close" data-i18n="common.cancel">Annuleren</button>
+        <button type="submit" class="btn btn-primary" data-i18n="project.invite_send">Uitnodiging sturen</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Nieuwe fase -->
+<div class="modal-backdrop" id="modal-new-phase">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="phase-modal-title" data-i18n="phase.new">Nieuwe fase</h2>
+      <button class="modal-close">✕</button>
+    </div>
+    <form id="form-phase">
+      <input type="hidden" id="ph-id" />
+      <div class="form-group"><label data-i18n="phase.name">Naam</label><input type="text" id="ph-name" required /></div>
+      <div class="two-col">
+        <div class="form-group"><label data-i18n="phase.budget_hours">Budgeturen</label><input type="number" id="ph-budget" min="0" step="0.5" /></div>
+        <div class="form-group"><label data-i18n="phase.hourly_rate">Uurtarief (€)</label><input type="number" id="ph-rate" min="0" step="0.01" /></div>
+      </div>
+      <div class="form-group">
+        <label data-i18n="phase.status.active">Status</label>
+        <select id="ph-status">
+          <option value="planned" data-i18n="phase.status.planned">Gepland</option>
+          <option value="active" data-i18n="phase.status.active">Actief</option>
+          <option value="completed" data-i18n="phase.status.completed">Afgerond</option>
+        </select>
+      </div>
+      <div class="form-group"><label data-i18n="phase.order">Volgorde</label><input type="number" id="ph-order" min="1" value="1" /></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close" data-i18n="common.cancel">Annuleren</button>
+        <button type="submit" class="btn btn-primary" data-i18n="common.save">Opslaan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Uren boeken (project) -->
+<div class="modal-backdrop" id="modal-hours">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="hours-modal-title" data-i18n="hours.title">Uren boeken</h2>
+      <button class="modal-close">✕</button>
+    </div>
+    <form id="form-hours">
+      <input type="hidden" id="h-hour-id" />
+      <div class="form-group">
+        <label data-i18n="hours.phase">Fase</label>
+        <select id="h-phase"></select>
+      </div>
+      <div class="form-group"><label data-i18n="hours.date">Datum</label><input type="date" id="h-date" /></div>
+      <div class="form-group">
+        <label data-i18n="hours.duration">Duur</label>
+        <div class="duration-grid">
+          <button type="button" class="duration-btn" data-min="15">+15 min</button>
+          <button type="button" class="duration-btn" data-min="30">+30 min</button>
+          <button type="button" class="duration-btn" data-min="60">+1 u</button>
+          <button type="button" class="duration-btn" data-min="120">+2 u</button>
+        </div>
+        <input type="number" id="h-minutes" min="15" step="15" placeholder="Minuten" />
+      </div>
+      <div class="form-group">
+        <label data-i18n="hours.category">Categorie</label>
+        <select id="h-category">
+          <option value="within_budget">Binnen budget</option>
+          <option value="non_billable">Niet declarabel</option>
+          <option value="extra_over_budget">Extra buiten budget</option>
+        </select>
+      </div>
+      <div class="form-group"><label data-i18n="hours.description">Omschrijving</label><textarea id="h-description"></textarea></div>
+      <div class="form-group" id="reason-group" style="display:none">
+        <label data-i18n="hours.reason">Reden wijziging</label>
+        <input type="text" id="h-reason" />
+      </div>
+      <div id="hours-error" class="form-error" style="display:none"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close" data-i18n="common.cancel">Annuleren</button>
+        <button type="submit" class="btn btn-primary" data-i18n="common.save">Opslaan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Reiskosten -->
+<div class="modal-backdrop" id="modal-travel">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" data-i18n="travel.new">Reiskosten toevoegen</h2>
+      <button class="modal-close">✕</button>
+    </div>
+    <form id="form-travel">
+      <div class="form-group">
+        <label data-i18n="travel.type">Type</label>
+        <select id="tr-type">
+          <option value="fixed" data-i18n="travel.fixed">Vast bedrag</option>
+          <option value="per_km" data-i18n="travel.per_km">Per kilometer</option>
+        </select>
+      </div>
+      <div class="form-group"><label data-i18n="travel.description">Omschrijving</label><input type="text" id="tr-description" required /></div>
+      <div class="form-group"><label data-i18n="common.date">Datum</label><input type="date" id="tr-date" /></div>
+      <div id="tr-fixed-fields">
+        <div class="form-group"><label data-i18n="travel.amount">Bedrag (€)</label><input type="number" id="tr-amount" min="0" step="0.01" /></div>
+      </div>
+      <div id="tr-km-fields" style="display:none">
+        <div class="two-col">
+          <div class="form-group"><label data-i18n="travel.km">Kilometers</label><input type="number" id="tr-km" min="0" step="0.1" /></div>
+          <div class="form-group"><label data-i18n="travel.km_rate">Tarief/km (€)</label><input type="number" id="tr-km-rate" min="0" step="0.001" value="0.23" /></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label data-i18n="hours.phase">Fase</label>
+        <select id="tr-phase"></select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close" data-i18n="common.cancel">Annuleren</button>
+        <button type="submit" class="btn btn-primary" data-i18n="common.save">Opslaan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Voorschot -->
+<div class="modal-backdrop" id="modal-expense">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" data-i18n="expense.new">Voorschot toevoegen</h2>
+      <button class="modal-close">✕</button>
+    </div>
+    <form id="form-expense">
+      <div class="form-group"><label data-i18n="expense.description">Omschrijving</label><input type="text" id="exp-description" required /></div>
+      <div class="form-group"><label data-i18n="common.date">Datum</label><input type="date" id="exp-date" /></div>
+      <div class="form-group"><label data-i18n="expense.amount">Bedrag (€)</label><input type="number" id="exp-amount" min="0" step="0.01" /></div>
+      <div class="form-group">
+        <label data-i18n="hours.phase">Fase</label>
+        <select id="exp-phase"></select>
+      </div>
+      <div class="form-group">
+        <label data-i18n="expense.receipt">Bon (optioneel)</label>
+        <div class="drop-zone" id="exp-drop-zone">
+          <input type="file" id="exp-receipt" accept="image/*,application/pdf" />
+          <label for="exp-receipt" style="cursor:pointer">Klik om een bon te selecteren</label>
+        </div>
+        <div id="exp-file-name" class="text-muted" style="margin-top:var(--space-xs);font-size:0.8rem"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close" data-i18n="common.cancel">Annuleren</button>
+        <button type="submit" class="btn btn-primary" data-i18n="common.save">Opslaan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Factuur -->
+<div class="modal-backdrop" id="modal-invoice">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" data-i18n="invoice.new">Factuurmoment toevoegen</h2>
+      <button class="modal-close">✕</button>
+    </div>
+    <form id="form-invoice">
+      <div class="form-group">
+        <label data-i18n="hours.phase">Fase</label>
+        <select id="inv2-phase"></select>
+      </div>
+      <div class="form-group"><label data-i18n="invoice.date">Factuurdatum</label><input type="date" id="inv2-date" /></div>
+      <div class="form-group"><label data-i18n="invoice.amount">Bedrag (€)</label><input type="number" id="inv2-amount" min="0" step="0.01" /></div>
+      <div class="form-group"><label data-i18n="invoice.description">Omschrijving</label><textarea id="inv2-description"></textarea></div>
+      <div class="form-group">
+        <label data-i18n="invoice.pdf">Factuur PDF (optioneel)</label>
+        <div class="drop-zone">
+          <input type="file" id="inv2-pdf" accept="application/pdf" />
+          <label for="inv2-pdf" style="cursor:pointer">Klik om een PDF te selecteren</label>
+        </div>
+        <div id="inv2-file-name" class="text-muted" style="margin-top:var(--space-xs);font-size:0.8rem"></div>
+      </div>
+      <div class="form-group" style="display:flex;align-items:center;gap:var(--space-sm)">
+        <input type="checkbox" id="inv2-visible" />
+        <label for="inv2-visible" style="margin-bottom:0;text-transform:none;letter-spacing:0;font-size:0.9rem" data-i18n="invoice.visible">Zichtbaar voor klant</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close" data-i18n="common.cancel">Annuleren</button>
+        <button type="submit" class="btn btn-primary" data-i18n="common.save">Opslaan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Document uploaden -->
+<div class="modal-backdrop" id="modal-document">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="doc-modal-title" data-i18n="document.new">Document toevoegen</h2>
+      <button class="modal-close">✕</button>
+    </div>
+    <form id="form-document">
+      <input type="hidden" id="doc-storage-type" value="upload" />
+      <div class="form-group"><label data-i18n="document.name">Naam</label><input type="text" id="doc-name" required /></div>
+      <div class="form-group">
+        <label data-i18n="document.type">Type</label>
+        <select id="doc-type">
+          <option value="schetsontwerp">Schetsontwerp</option>
+          <option value="definitief_ontwerp">Definitief ontwerp</option>
+          <option value="bouwbegeleiding">Bouwbegeleiding</option>
+          <option value="overig">Overig</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label data-i18n="document.phase">Fase (optioneel)</label>
+        <select id="doc-phase"><option value="">— geen koppeling —</option></select>
+      </div>
+      <div id="doc-upload-field" class="form-group">
+        <label data-i18n="document.upload">Bestand</label>
+        <div class="drop-zone">
+          <input type="file" id="doc-file" />
+          <label for="doc-file" style="cursor:pointer">Klik om een bestand te selecteren</label>
+        </div>
+        <div id="doc-file-name" class="text-muted" style="margin-top:var(--space-xs);font-size:0.8rem"></div>
+      </div>
+      <div id="doc-link-field" class="form-group" style="display:none">
+        <label data-i18n="document.url">URL</label>
+        <input type="url" id="doc-url" placeholder="https://" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close" data-i18n="common.cancel">Annuleren</button>
+        <button type="submit" class="btn btn-primary" data-i18n="common.save">Opslaan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/i18n.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/router.js"></script>
+<script src="js/project.js"></script>
+</body>
+</html>

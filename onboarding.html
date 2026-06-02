@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welkom — Studio Iris van Gelder</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+</head>
+<body>
+<div class="onboarding-shell">
+  <div class="onboarding-main">
+
+    <!-- Step 1: Welcome -->
+    <div class="onboarding-card" id="step-1">
+      <h2 data-i18n="onboarding.welcome.title">Welkom bij uw portaal</h2>
+      <p data-i18n="onboarding.welcome.body">Via dit portaal kunt u de voortgang van uw project volgen: uren, documenten, budgetten en facturen — altijd up to date.</p>
+      <div class="onboarding-actions">
+        <button class="btn btn-primary" onclick="goStep(2)" data-i18n="onboarding.welcome.next">Volgende</button>
+      </div>
+      <div class="onboarding-dots">
+        <div class="onboarding-dot active"></div>
+        <div class="onboarding-dot"></div>
+        <div class="onboarding-dot"></div>
+      </div>
+    </div>
+
+    <!-- Step 2: PWA install -->
+    <div class="onboarding-card" id="step-2" style="display:none">
+      <h2 data-i18n="onboarding.pwa.title">Installeer de app</h2>
+      <p id="pwa-instructions"></p>
+      <div class="onboarding-actions">
+        <button class="btn btn-secondary" onclick="goStep(3)" data-i18n="onboarding.pwa.skip">Overslaan</button>
+        <button class="btn btn-primary" onclick="goStep(3)" data-i18n="onboarding.pwa.done">Klaar</button>
+      </div>
+      <div class="onboarding-dots">
+        <div class="onboarding-dot"></div>
+        <div class="onboarding-dot active"></div>
+        <div class="onboarding-dot"></div>
+      </div>
+    </div>
+
+    <!-- Step 3: Notifications -->
+    <div class="onboarding-card" id="step-3" style="display:none">
+      <h2 data-i18n="onboarding.notifications.title">Meldingen ontvangen</h2>
+      <p data-i18n="onboarding.notifications.body">Wilt u een melding ontvangen als Iris een nieuw document deelt?</p>
+      <div class="onboarding-actions">
+        <button class="btn btn-secondary" onclick="finishOnboarding()" data-i18n="onboarding.notifications.no">Nee, liever niet</button>
+        <button class="btn btn-primary" onclick="requestNotifications()" data-i18n="onboarding.notifications.yes">Ja, meldingen aan</button>
+      </div>
+      <div class="onboarding-dots">
+        <div class="onboarding-dot"></div>
+        <div class="onboarding-dot"></div>
+        <div class="onboarding-dot active"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/i18n.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/router.js"></script>
+<script>
+  requireAuth('client');
+
+  function goStep(n) {
+    document.getElementById('step-1').style.display = 'none';
+    document.getElementById('step-2').style.display = 'none';
+    document.getElementById('step-3').style.display = 'none';
+    document.getElementById('step-' + n).style.display = 'block';
+
+    if (n === 2) detectPlatform();
+  }
+
+  function detectPlatform() {
+    const ua = navigator.userAgent;
+    const el = document.getElementById('pwa-instructions');
+    if (/iPad|iPhone|iPod/.test(ua)) {
+      el.textContent = t('onboarding.pwa.body_ios');
+    } else if (/Android/.test(ua)) {
+      el.textContent = t('onboarding.pwa.body_android');
+    } else {
+      el.textContent = t('onboarding.pwa.body_desktop');
+    }
+  }
+
+  async function requestNotifications() {
+    try {
+      if (typeof OneSignal !== 'undefined') {
+        await OneSignal.showNativePrompt();
+        const playerId = await OneSignal.getUserId();
+        if (playerId) await api.auth.updatePlayerid(playerId);
+      }
+    } catch (_) {}
+    finishOnboarding();
+  }
+
+  async function finishOnboarding() {
+    try { await api.auth.updateOnboarding(); } catch (_) {}
+    window.location.href = '/portaal.html';
+  }
+</script>
+</body>
+</html>

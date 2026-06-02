@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --color-warm-white:  #F7F4F0;
+  --color-sand-light:  #EDE8E0;
+  --color-sand:        #C9B99A;
+  --color-taupe:       #8C7B6B;
+  --color-dark-warm:   #4A3D34;
+  --color-anthracite:  #2A2420;
+
+  --color-budget-ok:   #7A9E7E;
+  --color-budget-warn: #C4894F;
+  --color-budget-over: #B85C52;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  32px;
+  --space-xl:  64px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+}
+
+html { font-size: 15px; scroll-behavior: smooth; }
+
+body {
+  background: var(--color-warm-white);
+  color: var(--color-anthracite);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+h1 { font-size: 2.4rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.3rem; }
+h4 { font-size: 1.1rem; }
+
+p { margin-bottom: var(--space-md); }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--color-dark-warm); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+ul, ol { padding-left: var(--space-lg); }
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-sand-light);
+  margin: var(--space-lg) 0;
+}
+
+.text-muted  { color: var(--color-taupe); font-size: 0.9rem; }
+.text-small  { font-size: 0.85rem; }
+.text-center { text-align: center; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}

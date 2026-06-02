@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Studio Iris van Gelder</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+</head>
+<body>
+<div class="app-shell">
+
+  <nav class="topnav">
+    <span class="topnav-brand" data-i18n="app.name">Studio Iris van Gelder</span>
+    <div class="topnav-spacer"></div>
+    <div class="topnav-actions">
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="nl">NL</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <span class="topnav-user" id="nav-user"></span>
+      <button class="btn btn-ghost btn-sm" id="btn-logout" data-i18n="nav.logout">Uitloggen</button>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="page-header">
+      <h1 data-i18n="dashboard.title">Overzicht</h1>
+      <div class="page-header-actions">
+        <button class="btn btn-primary" id="btn-new-project" data-i18n="dashboard.new_project">Nieuw project</button>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid" id="stats-grid">
+      <div class="stat-card">
+        <span class="stat-value" id="stat-active">—</span>
+        <span class="stat-label" data-i18n="dashboard.active_projects">Actieve projecten</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value" id="stat-outstanding">—</span>
+        <span class="stat-label" data-i18n="dashboard.outstanding">Nog te factureren</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value" id="stat-budget-attention">—</span>
+        <span class="stat-label" data-i18n="dashboard.budget_attention">Budgetattentie</span>
+      </div>
+    </div>
+
+    <!-- Projects -->
+    <div id="projects-container">
+      <p class="text-muted" data-i18n="common.loading">Laden…</p>
+    </div>
+  </main>
+</div>
+
+<!-- Modal: Nieuw project -->
+<div class="modal-backdrop" id="modal-new-project">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" data-i18n="project.new">Nieuw project</h2>
+      <button class="modal-close" aria-label="Sluiten">✕</button>
+    </div>
+    <form id="form-new-project">
+      <div class="form-group">
+        <label data-i18n="project.name">Projectnaam</label>
+        <input type="text" id="np-name" required />
+      </div>
+      <div class="form-group">
+        <label data-i18n="project.description">Omschrijving</label>
+        <textarea id="np-description"></textarea>
+      </div>
+      <div class="form-group">
+        <label data-i18n="project.start_date">Startdatum</label>
+        <input type="date" id="np-start-date" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close" data-i18n="common.cancel">Annuleren</button>
+        <button type="submit" class="btn btn-primary" data-i18n="common.save">Opslaan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Uren boeken -->
+<div class="modal-backdrop" id="modal-hours">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" data-i18n="hours.title">Uren boeken</h2>
+      <button class="modal-close" aria-label="Sluiten">✕</button>
+    </div>
+    <form id="form-hours">
+      <div class="form-group">
+        <label data-i18n="hours.project">Project</label>
+        <select id="h-project">
+          <option value="">— selecteer —</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label data-i18n="hours.phase">Fase</label>
+        <select id="h-phase">
+          <option value="">— selecteer eerst een project —</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label data-i18n="hours.date">Datum</label>
+        <input type="date" id="h-date" />
+      </div>
+      <div class="form-group">
+        <label data-i18n="hours.duration">Duur</label>
+        <div class="duration-grid">
+          <button type="button" class="duration-btn" data-min="15">+15 min</button>
+          <button type="button" class="duration-btn" data-min="30">+30 min</button>
+          <button type="button" class="duration-btn" data-min="60">+1 u</button>
+          <button type="button" class="duration-btn" data-min="120">+2 u</button>
+        </div>
+        <input type="number" id="h-minutes" min="15" step="15" placeholder="Minuten (veelvoud van 15)" />
+      </div>
+      <div class="form-group">
+        <label data-i18n="hours.category">Categorie</label>
+        <select id="h-category">
+          <option value="within_budget" data-i18n="hours.within_budget">Binnen budget</option>
+          <option value="non_billable" data-i18n="hours.non_billable">Niet declarabel</option>
+          <option value="extra_over_budget" data-i18n="hours.extra">Extra buiten budget</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label data-i18n="hours.description">Omschrijving</label>
+        <textarea id="h-description"></textarea>
+      </div>
+      <div id="hours-error" class="form-error" style="display:none"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close" data-i18n="common.cancel">Annuleren</button>
+        <button type="submit" class="btn btn-primary" data-i18n="hours.save">Opslaan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/i18n.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/router.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

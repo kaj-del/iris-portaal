@@ -1,0 +1,301 @@
+/* ── Login / centered layouts ────────────────── */
+
+.page-centered {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+}
+
+.login-box {
+  width: 100%;
+  max-width: 420px;
+}
+
+.login-logo {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.login-logo h1 {
+  font-size: 1.8rem;
+  color: var(--color-dark-warm);
+}
+
+.login-logo .subtitle {
+  font-size: 0.85rem;
+  color: var(--color-taupe);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── App shell ───────────────────────────────── */
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Top nav ─────────────────────────────────── */
+
+.topnav {
+  height: 60px;
+  background: #fff;
+  border-bottom: 1px solid var(--color-sand-light);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-lg);
+  gap: var(--space-md);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.topnav-brand {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--color-dark-warm);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.topnav-spacer { flex: 1; }
+
+.topnav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.topnav-user {
+  font-size: 0.82rem;
+  color: var(--color-taupe);
+}
+
+/* ── Main content area ───────────────────────── */
+
+.main-content {
+  flex: 1;
+  padding: var(--space-lg);
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+  gap: var(--space-md);
+}
+
+.page-header h1 { margin-bottom: 0; }
+.page-header-actions { display: flex; gap: var(--space-sm); flex-shrink: 0; }
+
+/* ── Dashboard grid ──────────────────────────── */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.projects-grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.project-card {
+  background: #fff;
+  border: 1px solid var(--color-sand-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+}
+
+.project-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.project-card-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+}
+
+.project-card-meta {
+  font-size: 0.82rem;
+  color: var(--color-taupe);
+  margin-bottom: var(--space-md);
+}
+
+.project-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-sand-light);
+}
+
+.project-outstanding {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--color-dark-warm);
+}
+
+/* ── Two-column layout ───────────────────────── */
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+/* ── Section spacing ─────────────────────────── */
+
+.section { margin-bottom: var(--space-xl); }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+}
+
+/* ── Portaal layout ──────────────────────────── */
+
+.portaal-project-header {
+  margin-bottom: var(--space-xl);
+}
+
+.portaal-project-header h1 { margin-bottom: var(--space-sm); }
+
+.portaal-project-header .project-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.85rem;
+  color: var(--color-taupe);
+}
+
+.phase-block {
+  background: #fff;
+  border: 1px solid var(--color-sand-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+.phase-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.phase-block-title { font-family: var(--font-display); font-size: 1.15rem; }
+
+.phase-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-sand-light);
+}
+
+.phase-stat-item {}
+.phase-stat-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-taupe); }
+.phase-stat-value { font-family: var(--font-display); font-size: 1.2rem; }
+
+/* ── Document list ───────────────────────────── */
+
+.doc-list { display: flex; flex-direction: column; gap: var(--space-sm); }
+
+.doc-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md);
+  background: #fff;
+  border: 1px solid var(--color-sand-light);
+  border-radius: var(--radius-md);
+  gap: var(--space-md);
+}
+
+.doc-info { flex: 1; min-width: 0; }
+.doc-name { font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.doc-meta { font-size: 0.8rem; color: var(--color-taupe); }
+
+/* ── Onboarding layout ───────────────────────── */
+
+.onboarding-shell {
+  min-height: 100vh;
+  background: var(--color-warm-white);
+  display: flex;
+  flex-direction: column;
+}
+
+.onboarding-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+}
+
+.onboarding-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
+
+.onboarding-card h2 { margin-bottom: var(--space-md); }
+.onboarding-card p { color: var(--color-taupe); margin-bottom: var(--space-lg); }
+
+.onboarding-actions {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ──────────────────────────────── */
+
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .two-col    { grid-template-columns: 1fr; }
+  .three-col  { grid-template-columns: 1fr 1fr; }
+  .main-content { padding: var(--space-md); }
+  .topnav { padding: 0 var(--space-md); }
+  .page-header { flex-direction: column; align-items: flex-start; }
+  .project-card-footer { flex-direction: column; align-items: flex-start; }
+  .doc-item { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .three-col { grid-template-columns: 1fr; }
+  .modal { border-radius: 0; max-height: 100vh; }
+  .modal-backdrop { align-items: flex-end; padding: 0; }
+}

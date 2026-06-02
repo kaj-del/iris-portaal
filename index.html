@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studio Iris van Gelder</title>
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#2A2420" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+</head>
+<body class="page-centered">
+
+<!-- LOGIN FORM -->
+<div class="login-box" id="view-login">
+  <div class="login-logo">
+    <h1 data-i18n="app.name">Studio Iris van Gelder</h1>
+    <p class="subtitle">Klantportaal</p>
+  </div>
+
+  <div class="card">
+    <form id="login-form">
+      <div class="form-group">
+        <label for="email" data-i18n="login.email">E-mailadres</label>
+        <input type="email" id="email" name="email" autocomplete="email" required />
+      </div>
+      <div class="form-group">
+        <label for="pin" data-i18n="login.pin">Pincode</label>
+        <div class="pin-input" id="pin-inputs">
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="0" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="1" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="2" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="3" />
+        </div>
+      </div>
+      <div id="login-error" class="form-error" style="display:none" data-i18n="login.error"></div>
+      <div class="form-group" style="display:flex;align-items:center;gap:var(--space-sm)">
+        <input type="checkbox" id="remember" />
+        <label for="remember" style="margin-bottom:0;text-transform:none;letter-spacing:0;font-size:0.85rem">Aangemeld blijven</label>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%" data-i18n="login.submit">Inloggen</button>
+    </form>
+    <p style="margin-top:var(--space-md);text-align:center;font-size:0.82rem">
+      <a href="#" onclick="showView('setup')" class="text-muted">Eerste keer instellen</a>
+    </p>
+  </div>
+</div>
+
+<!-- FIRST-RUN ADMIN SETUP -->
+<div class="login-box" id="view-setup" style="display:none">
+  <div class="login-logo">
+    <h1 data-i18n="app.name">Studio Iris van Gelder</h1>
+    <p class="subtitle">Eerste keer instellen</p>
+  </div>
+  <div class="card">
+    <p class="text-muted" style="margin-bottom:var(--space-lg)">Stel uw beheerderspincode in om te beginnen. Dit scherm is daarna niet meer beschikbaar.</p>
+    <form id="setup-form">
+      <div class="form-group">
+        <label>E-mailadres</label>
+        <input type="email" id="setup-email" required placeholder="iris@example.com" />
+      </div>
+      <div class="form-group">
+        <label>Kies pincode (4 cijfers)</label>
+        <div class="pin-input" id="setup-pin-inputs">
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="0" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="1" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="2" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="3" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Herhaal pincode</label>
+        <div class="pin-input" id="setup-pin2-inputs">
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="0" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="1" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="2" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="3" />
+        </div>
+      </div>
+      <div id="setup-error" class="form-error" style="display:none"></div>
+      <button type="submit" class="btn btn-primary" style="width:100%">Account aanmaken</button>
+    </form>
+    <p style="margin-top:var(--space-md);text-align:center">
+      <a href="#" onclick="showView('login')">← Terug naar inloggen</a>
+    </p>
+  </div>
+</div>
+
+<!-- ACTIVATION FORM -->
+<div class="login-box" id="view-activate" style="display:none">
+  <div class="login-logo">
+    <h1 data-i18n="app.name">Studio Iris van Gelder</h1>
+    <p class="subtitle" data-i18n="activate.title">Kies een pincode</p>
+  </div>
+
+  <div class="card">
+    <p class="text-muted" style="margin-bottom:var(--space-lg)">Welkom! Stel hieronder uw viercijferige pincode in om uw account te activeren.</p>
+    <form id="activate-form">
+      <div class="form-group">
+        <label data-i18n="activate.pin">Pincode (4 cijfers)</label>
+        <div class="pin-input" id="act-pin-inputs">
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="0" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="1" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="2" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="3" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label data-i18n="activate.pin_confirm">Herhaal pincode</label>
+        <div class="pin-input" id="act-pin2-inputs">
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="0" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="1" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="2" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="3" />
+        </div>
+      </div>
+      <div id="activate-error" class="form-error" style="display:none"></div>
+      <button type="submit" class="btn btn-primary" style="width:100%" data-i18n="activate.submit">Account activeren</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/i18n.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/router.js"></script>
+<script>
+  function showView(name) {
+    ['view-login', 'view-activate', 'view-setup'].forEach(id => {
+      document.getElementById(id).style.display = 'none';
+    });
+    document.getElementById('view-' + name).style.display = 'block';
+  }
+
+  function setupPinInputs(container) {
+    const inputs = container.querySelectorAll('input[data-pin]');
+    inputs.forEach((input, i) => {
+      input.addEventListener('input', () => {
+        input.value = input.value.replace(/[^0-9]/g, '');
+        if (input.value && i < inputs.length - 1) inputs[i + 1].focus();
+      });
+      input.addEventListener('keydown', e => {
+        if (e.key === 'Backspace' && !input.value && i > 0) inputs[i - 1].focus();
+      });
+    });
+    return () => Array.from(inputs).map(i => i.value).join('');
+  }
+
+  const getLoginPin  = setupPinInputs(document.getElementById('pin-inputs'));
+  const getActPin    = setupPinInputs(document.getElementById('act-pin-inputs'));
+  const getActPin2   = setupPinInputs(document.getElementById('act-pin2-inputs'));
+  const getSetupPin  = setupPinInputs(document.getElementById('setup-pin-inputs'));
+  const getSetupPin2 = setupPinInputs(document.getElementById('setup-pin2-inputs'));
+
+  // Check for activation token in URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const inviteToken = urlParams.get('token');
+
+  if (inviteToken) {
+    document.getElementById('view-login').style.display = 'none';
+    document.getElementById('view-activate').style.display = 'block';
+  }
+
+  document.getElementById('login-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const pin = getLoginPin();
+    const errEl = document.getElementById('login-error');
+    errEl.style.display = 'none';
+
+    try {
+      const data = await api.auth.login(email, pin);
+      saveSession(data.session_token, document.getElementById('remember').checked);
+      if (data.role === 'admin') {
+        window.location.href = '/dashboard-iris.html';
+      } else if (!data.onboarding_done) {
+        window.location.href = '/onboarding.html';
+      } else {
+        window.location.href = '/portaal.html';
+      }
+    } catch (err) {
+      errEl.textContent = t('login.error');
+      errEl.style.display = 'block';
+    }
+  });
+
+  document.getElementById('setup-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const pin  = getSetupPin();
+    const pin2 = getSetupPin2();
+    const errEl = document.getElementById('setup-error');
+    errEl.style.display = 'none';
+    if (pin.length !== 4) { errEl.textContent = t('activate.invalid'); errEl.style.display = 'block'; return; }
+    if (pin !== pin2) { errEl.textContent = t('activate.mismatch'); errEl.style.display = 'block'; return; }
+    const email = document.getElementById('setup-email').value.trim();
+    try {
+      const data = await api.auth.setupAdmin(email, pin);
+      saveSession(data.session_token, false);
+      window.location.href = '/dashboard-iris.html';
+    } catch (err) {
+      errEl.textContent = err.message === 'ADMIN_ALREADY_EXISTS'
+        ? 'Er bestaat al een beheerder. Log gewoon in.'
+        : (err.message || t('common.error'));
+      errEl.style.display = 'block';
+    }
+  });
+
+  document.getElementById('activate-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const pin  = getActPin();
+    const pin2 = getActPin2();
+    const errEl = document.getElementById('activate-error');
+    errEl.style.display = 'none';
+
+    if (pin.length !== 4) {
+      errEl.textContent = t('activate.invalid');
+      errEl.style.display = 'block';
+      return;
+    }
+    if (pin !== pin2) {
+      errEl.textContent = t('activate.mismatch');
+      errEl.style.display = 'block';
+      return;
+    }
+
+    try {
+      const data = await api.auth.activate(inviteToken, pin);
+      saveSession(data.session_token, false);
+      window.location.href = '/onboarding.html';
+    } catch (err) {
+      errEl.textContent = err.message || t('common.error');
+      errEl.style.display = 'block';
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mijn project — Studio Iris van Gelder</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+</head>
+<body>
+<div class="app-shell">
+
+  <nav class="topnav">
+    <span class="topnav-brand" data-i18n="app.name">Studio Iris van Gelder</span>
+    <div class="topnav-spacer"></div>
+    <div class="topnav-actions">
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="nl">NL</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <span class="topnav-user" id="nav-user"></span>
+      <button class="btn btn-ghost btn-sm" id="btn-logout" data-i18n="nav.logout">Uitloggen</button>
+    </div>
+  </nav>
+
+  <main class="main-content" id="portaal-content">
+    <p class="text-muted" data-i18n="common.loading">Laden…</p>
+  </main>
+
+</div>
+
+<!-- Modal: PIN wijzigen -->
+<div class="modal-backdrop" id="modal-change-pin">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" data-i18n="settings.change_pin">Pincode wijzigen</h2>
+      <button class="modal-close">✕</button>
+    </div>
+    <form id="form-change-pin">
+      <div class="form-group">
+        <label data-i18n="settings.old_pin">Huidige pincode</label>
+        <div class="pin-input" id="old-pin-inputs">
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="0" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="1" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="2" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="3" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label data-i18n="settings.new_pin">Nieuwe pincode (4 cijfers)</label>
+        <div class="pin-input" id="new-pin-inputs">
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="0" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="1" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="2" />
+          <input type="password" maxlength="1" inputmode="numeric" pattern="[0-9]" data-pin="3" />
+        </div>
+      </div>
+      <div id="pin-change-error" class="form-error" style="display:none"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-close" data-i18n="common.cancel">Annuleren</button>
+        <button type="submit" class="btn btn-primary" data-i18n="common.save">Opslaan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/i18n.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/router.js"></script>
+<script src="js/portaal.js"></script>
+</body>
+</html>
