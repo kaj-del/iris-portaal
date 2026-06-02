@@ -23,7 +23,7 @@ if (!API_BASE) {
 async function apiCall(action, method = 'GET', params = {}) {
   const token = sessionStorage.getItem('session_token') || localStorage.getItem('session_token');
   // GAS does not expose custom HTTP headers — always pass the token as a parameter.
-  const headers = { 'Content-Type': 'application/json' };
+  const headers = { 'Content-Type': 'text/plain' };
 
   let url = API_BASE + '?action=' + encodeURIComponent(action);
   let options = { method, headers };
