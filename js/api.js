@@ -1,6 +1,6 @@
 const API_BASE = (function () {
   const stored = localStorage.getItem('gas_url');
-  return stored || 'https://script.google.com/macros/s/JOUW_URL_HIER/exec';
+  return stored || 'https://script.google.com/macros/s/AKfycbyDMO-1H2hmvDIYpAgTjbIW6M4rmHlFdrrEGGN168ymfj8ZeHXTMHcUAxPm_IP9PfIlPg/exec';
 })();
 
 // Warn once if GAS URL is not configured
